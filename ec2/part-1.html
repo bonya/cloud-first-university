@@ -10,6 +10,30 @@
     <!--[if lt IE 9]>
     <script src="../externals/reveal/lib/js/html5shiv.js"></script>
     <![endif]-->
+
+    <style>
+        .reveal section img {
+            border: none;
+            box-shadow: none;
+        }
+
+        .reveal img, .reveal video, .reveal iframe {
+            max-width: 85%;
+            max-height: 85%;
+        }
+
+        .reveal em {
+            color: #CF5D90;
+        }
+
+        .reveal .slides section li {
+            padding-bottom: 0.4em;
+        }
+
+        .reveal .slides section .weird {
+            color: #CF5D90;;
+        }
+    </style>
 </head>
 
 <body>
@@ -23,41 +47,290 @@
 
 
             <section>
-                <h3>EC2 Concepts</h3>
-
-                <section class="future" style="display: none;" aria-hidden="true">
-
+                <section>
+                    <h3>Introduction to Management console</h3>
                 </section>
 
                 <section class="future" style="display: none;" aria-hidden="true">
+                    <h3>AWS Services</h3>
+                    <img src="media/AWSConsole.png"/>
                 </section>
 
                 <section class="future" style="display: none;" aria-hidden="true">
+                    <h3>EC2 Dashboard</h3>
+                    <img src="media/EC2Console.png"/>
+                </section>
+
+            </section>
+
+
+            <section>
+                <h3>Starting new EC2 instance</h3>
+            </section>
+
+
+            <section>
+                <h3>AWS Regions and Availability Zones</h3>
+
+                <section>
+                    <img src="media/Start-0-Region.png"/>
+                </section>
+
+                <section>
+                    <ul>
+                        <li>AWS is hosted in multiple locations worldwide - Regions</li>
+                        <li class="fragment fade-in">Region consists of multiple isolated locations - Availability Zones</li>
+                        <li class="fragment fade-in">You can choose <span>Region</span> and <span>Availability Zone<span></li>
+                    </ul>
+
+                    <img class="fragment fade-in" src="media/AWS-Region+AvailabilityZones.png"/>
+
+                </section>
+
+            </section>
+
+
+            <section>
+                <h3>Amazon Machine Image (AMI)</h3>
+
+                <section>
+                    <img src="media/Start-1-AMI.png"/>
+                </section>
+
+                <section>
+                    <ul>
+                        <li>AMI is a templates that contains configuration - operation system and software packages</li>
+                        <li class="fragment fade-in">AMI is used to launch an instance - virtual server on AWS</li>
+                        <li class="fragment fade-in">There are AMIs provided by amazon and AMIs created by others</li>
+                        <li class="fragment fade-in">You can create your own AMI to launch instances</li>
+                        <li class="fragment fade-in">Amazon offer a marketplace for AMIs</li>
+                    </ul>
+                </section>
+
+            </section>
+
+
+            <section>
+                <h3>Instance Type</h3>
+
+                <section>
+                    <img src="media/Start-2-InstanceType.png"/>
+                </section>
+
+                <section>
+                    <ul>
+                        <li>Instance type is combination of CPU, Memory ans Storage</li>
+                        <li class="fragment fade-in">By choosing right instance type, you get an optimal mix of resources for you application by minimizing costs</li>
+                        <li class="fragment fade-in">T2, M3 - general purpose</li>
+                        <li class="fragment fade-in">C3, C4 - compute optimized</li>
+                        <li class="fragment fade-in">R3 - memory optimized</li>
+                        <li class="fragment fade-in">G2 - GPU for CUDA</li>
+                        <li class="fragment fade-in">I2 - storage optimized high I/O</li>
+                        <li class="fragment fade-in">D2 - dense storage optimized</li>
+                    </ul>
+                </section>
+
+            </section>
+
+
+            <section>
+                <h3>Instance Configuration</h3>
+
+                <section>
+                    <img src="media/Start-3-InstanceConfiguration.png"/>
+                </section>
+
+                <section>
+                    <ul>
+                        <li class="fragment fade-in">Number of instances to be launched</li>
+                        <li class="fragment fade-in">Request Spot Instances</li>
+                        <li class="fragment fade-in">Add instance to VPC and Subnet</li>
+                        <li class="fragment fade-in">Add instance to IAM Role</li>
+                        <li class="fragment fade-in">Configure basic monitoring, alerts, shutdown behaviour</li>
+                    </ul>
+                </section>
+
+            </section>
+
+
+            <section>
+                <h3>Storage Configuration</h3>
+
+                <ul>
+                    <li>Add additional volumes</li>
+                    <li>Specify volume size</li>
+                    <li>Configure volume IO performance</li>
+                    <li>Specify is volume should be deleted upon instance termination</li>
+                </ul>
+
+                <img src="media/Start-4-Storage.png"/>
+            </section>
+
+
+            <section>
+                <h3>Instance Tags</h3>
+
+                <ul>
+                    <li>Provide human-readable instance Name</li>
+                    <li>Add extra tags to store metadata</li>
+                </ul>
+
+                <img src="media/Start-5-Tagging.png"/>
+            </section>
+
+
+            <section>
+                <h3>Security Groups</h3>
+
+                <ul>
+                    <li>Security Group (SG) is a virtual firewall</li>
+                    <li>SG can be used by multiple instances</li>
+                    <li>SG is created in particular Region</li>
+                    <li>Changes in SG are applied to all associated instances</li>
+                </ul>
+
+                <img src="media/Start-6-SecurityGroup.png"/>
+            </section>
+
+
+            <section>
+                <h3>Launch Configuration Overview</h3>
+
+                <img src="media/Start-8-Overview.png"/>
+            </section>
+
+
+            <section>
+                <h3>Hands-On</h3>
+                <ul>
+                    <li class="fragment fade-in">Launch new t2.micro EC2 instance</li>
+                    <li class="fragment fade-in">Don't forget to open ports 22 and 80</li>
+                    <li class="fragment fade-in">ssh to your instance</li>
+                    <li class="fragment fade-in">Install Nginx http server</li>
+                    <li class="fragment fade-in">Check in the browser, if your instance is serving http requests</li>
+                </ul>
+
+                <pre class='fragment fade-in'>
+                    <code data-trim>
+                        sudo apt-get update
+                        sudo apt-get install -y nginx
+                    </code>
+                </pre>
+
+            </section>
+
+
+            <section>
+                <h3>Instance Lifecyle</h3>
+                <img src="media/AWS-InstanceLifecycle.png"/>
+            </section>
+
+            <section>
+                <section>
+                    <h3>Instance pricing models</h3>
+
+                    <ul>
+                        <li>On Demand Instace</li>
+                        <li>Reserved Instance</li>
+                        <li>Spot Price</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>On Demand Instance</h3>
+
+                    <ul>
+                        <li class="fragment fade-in">Pay for capacity by hours used</li>
+                        <li class="fragment fade-in">No long-term commitment and upfront fees</li>
+                        <li class="fragment fade-in">Used to handle spikes in workload</li>
+                        <li class="fragment fade-in">Development or Staging</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Reserved Instance</h3>
+
+                    <ul>
+                        <li class="fragment fade-in">Upfront fees with mid- and long-term contracts</li>
+                        <li class="fragment fade-in">Up to 50% cheaper than on demand instances</li>
+                        <li class="fragment fade-in">Used to handle stable workloads</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Spot Instance</h3>
+
+                    <ul>
+                        <li class="fragment fade-in">(Normally) 50-90% cheaper than on demand</li>
+                        <li class="fragment fade-in">Can be terminated if somebody bids higher price</li>
+                        <li class="fragment fade-in">Applications feasible only at very low computing prices</li>
+                        <li class="fragment fade-in">Applications can stand unexpected server termination</li>
+                    </ul>
                 </section>
             </section>
 
             <section>
-                <h3></h3>
+                <h3>EBS: Elastic Block Store</h3>
 
+                <ul>
+                    <li class="fragment fade-in"><em>EBS</em> is a persistent storage for you data and applications</li>
+                    <li class="fragment fade-in">EBS is attached as a <em>volume</em> to your instance</li>
+                    <li class="fragment fade-in">You can create <em>Snapshots</em> from EBS volumes</li>
+                    <li class="fragment fade-in">New EBS volume can be created from <em>Snapshots</em></li>
+                    <li class="fragment fade-in">Snapshots are <em>incremental</em></li>
+                    <li class="fragment fade-in"><em>Provisioned IOPS</em> offer consistent performance for high workloads</li>
+                    <li class="fragment fade-in">EBS offers build-in <em>Encryption</em> for selected isntance types</li>
+                </ul>
             </section>
 
 
             <section>
-                <h3>Slide 3</h3>
-                <p>How does one revisit an arbitrary slide in code?</p>
-                <p>Visit internal slide<a href="#/show-a-link"> 2</a>
+                <h3>Summary</h3>
+
+                <ul>
+                    <li class="fragment fade-in"><em>Instance</em> is a virtual machine running in cloud</li>
+                    <li class="fragment fade-in">Instance is started in particular <em>Region</em> and <em>Availability Zone</em></li>
+                    <li class="fragment fade-in"><em>AMI</em> is a template for creating new instances</li>
+                    <li class="fragment fade-in"><em>Instance type</em> is a combination CPU, RAM and Storage</li>
+                    <li class="fragment fade-in">Instance can be added to <em>VPC</em>, <em>IAM Role</em> etc.</li>
+                    <li class="fragment fade-in">Use <em>EBS</em> volumes to store you data</li>
+                    <li class="fragment fade-in">Use <em>Security Group</em> open instance ports</li>
+                    <li class="fragment fade-in"><em>Tags</em> name your instance and provide meta data</li>
+                </ul>
+            </section>
+
+
+
+            <section>
+                <h3>Resources<h3>
+
+                <ul>
+                    <li class="fragment fade-in"><a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html" target="_blank">EC2 Getting Started Guide</a></li>
+                    <li class="fragment fade-in"><a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html" target="_blank">Security Groups Guide</a> (Linux)</li>
+                    <li class="fragment fade-in"><a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Storage.html" target="_blank">Storage Guide</a></li>
+                    <li class="fragment fade-in"><a href="http://aws.amazon.com/ec2/pricing/" target="_blank">Pricing</a></li>
+                </ul>
             </section>
 
 
             <section>
-                <h2>Summary</h2>
+                <h3>Homework</h3>
+
+                <p>Scaling you Web App with Elastic Load Balancer</p>
+
+                <ul>
+                    <li>Start 2 intances with nginx</li>
+                    <li>Create elastic load balancer and add your instances</li>
+                    <li>Access nginx's default web site via load balancer</li>
+                    <li>Terminate one instance and make sure, that your site still works</li>
+                </ul>
             </section>
 
 
             <section>
-                <h2>Resources<h2>
+                <h1 class="weird">Thanks<h1>
+                <h3>for you attention!</h3>
             </section>
-
         </div>
     </div>
 
